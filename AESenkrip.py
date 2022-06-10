@@ -17,7 +17,7 @@ key = PBKDF2(password, salt_byte, dkLen=32)
 #CFB enkrip
 from Crypto.Cipher import AES
 
-output_file = 'file-enkripsi-AES.txt'
+output_file = 'file teks.txt'
 data = b'Halo, ini percobaan AES'
 
 cipher = AES.new(key, AES.MODE_CFB) # CFB mode

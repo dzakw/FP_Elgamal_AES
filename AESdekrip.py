@@ -21,8 +21,8 @@ dekrip_key = key # The key used for encryption (do not store/read this from the 
 #CFB dekrip
 from Crypto.Cipher import AES
 
-input_file = 'file-enkripsi-AES.txt'
-output_file = 'file-dekripsi-AES.txt'
+input_file = 'file teks.txt'
+output_file = 'output file-dekripsi-AES.txt'
 # key = b'YOUR KEY'
 
 file_in = open(input_file, 'rb')
