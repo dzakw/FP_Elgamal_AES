@@ -1,13 +1,32 @@
-from traceback import print_tb
 from Crypto.Random import get_random_bytes
 from Crypto.Protocol.KDF import PBKDF2
+import elgamal
+
 salt_word = input('Masukkan key:')
 salt_byte = bytes(salt_word, 'utf-8')
-print(salt_byte)
+# q=elgamal.q
+# h=elgamal.h
+# g=elgamal.g
+# ct,p=elgamal.enc(salt_word,q,h,g)
+# salt_byte = bytes(ct)
 # print(salt_word)
 password = 'jeki123'
 key = PBKDF2(password, salt_byte, dkLen=32)
 # print(key)
+
+#CFB enkrip
+from Crypto.Cipher import AES
+
+output_file = 'file-enkripsi-AES.txt'
+data = b'Halo, ini percobaan AES'
+
+cipher = AES.new(key, AES.MODE_CFB) # CFB mode
+ciphered_data = cipher.encrypt(data) # Only need to encrypt the data, no padding required for this mode
+
+file_out = open(output_file, "wb")
+file_out.write(cipher.iv)
+file_out.write(ciphered_data)
+file_out.close()
 
 # #CBC enkrip
 # from Crypto.Cipher import AES
@@ -25,20 +44,6 @@ key = PBKDF2(password, salt_byte, dkLen=32)
 # file_out.write(cipher.iv) # Write the iv to the output file (will be required for decryption)
 # file_out.write(ciphered_data) # Write the varying length ciphertext to the file (this is the encrypted data)
 # file_out.close()
-
-#CFB enkrip
-from Crypto.Cipher import AES
-
-output_file = 'file-enkripsi-AES.txt'
-data = b'Halo, ini percobaan AES'
-
-cipher = AES.new(key, AES.MODE_CFB) # CFB mode
-ciphered_data = cipher.encrypt(data) # Only need to encrypt the data, no padding required for this mode
-
-file_out = open(output_file, "wb")
-file_out.write(cipher.iv)
-file_out.write(ciphered_data)
-file_out.close()
 
 # #CFB dekrip
 # from Crypto.Cipher import AES
